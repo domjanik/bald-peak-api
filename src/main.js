@@ -4,8 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const newsController = require("./controllers/newsController");
-const app = express();
-const port = 4000;
+exports.app = express();
+exports.port = 4000;
 var originsWhitelist = [
     'http://localhost:4200'
 ];
@@ -14,16 +14,11 @@ const corsOptions = {
         callback(null, originsWhitelist.indexOf(origin) !== -1);
     }
 };
-app.use(cors(corsOptions));
-app.use(bodyParser.urlencoded({
+exports.app.use(cors(corsOptions));
+exports.app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(bodyParser.json());
-const http = require('http').Server(app);
-function runApi() {
-    app.get('/news', newsController.getNews);
-    http.listen(port, () => console.log(`Example app listening on port ${port}!`));
-    return http;
-}
-exports.default = runApi;
+exports.app.use(bodyParser.json());
+exports.app.get('/news', newsController.getNews);
+// export default app;
 //# sourceMappingURL=main.js.map

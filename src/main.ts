@@ -3,8 +3,8 @@ import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as newsController from './controllers/newsController';
 
-const app = express();
-const port = 4000;
+export const app = express();
+export const port = 4000;
 var originsWhitelist = [
   'http://localhost:4200'
 ];
@@ -18,11 +18,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json())
-const http = require('http').Server(app);
 
-export default function runApi() {
-    app.get('/news', newsController.getNews);
-   
-    http.listen(port, () => console.log(`Example app listening on port ${port}!`));
-    return http;    
-}
+app.get('/news', newsController.getNews);
+
+// export default app;
