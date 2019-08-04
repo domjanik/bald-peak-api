@@ -1,1 +1,0 @@
-{"version":3,"file":"newsController.js","sourceRoot":"","sources":["newsController.ts"],"names":[],"mappings":";;AAAA,uDAAuD;AAEvD,SAAS,OAAO,CAAC,GAAG,EAAE,GAAG;IACrB,IAAI,IAAI,GAAG,WAAW,CAAC,OAAO,EAAE,CAAA;IAChC,OAAO,GAAG,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC;AACtC,CAAC;AAGG,0BAAO"}
