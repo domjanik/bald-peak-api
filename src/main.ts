@@ -12,17 +12,20 @@ const corsOptions = {
   origin: function(origin, callback){
     callback(null, originsWhitelist.indexOf(origin) !== -1);
   }
-}
+};
+
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.head('', (req, res) => {
   res.status(200).send();
-})
+});
+
 app.get('/news', newsController.getNewsList);
 app.get('/news/:id', newsController.getNewsById);
-
-// export default app;
+app.post('/news', newsController.insertNews);
+app.put('/news/:id', newsController.updateNews);
+app.delete('/news/:id', newsController.removeNews);

@@ -24,5 +24,7 @@ exports.app.head('', (req, res) => {
 });
 exports.app.get('/news', newsController.getNewsList);
 exports.app.get('/news/:id', newsController.getNewsById);
-// export default app;
+exports.app.post('/news', newsController.insertNews);
+exports.app.put('/news/:id', newsController.updateNews);
+exports.app.delete('/news/:id', newsController.removeNews);
 //# sourceMappingURL=main.js.map

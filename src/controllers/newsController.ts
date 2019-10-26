@@ -1,27 +1,35 @@
 import * as newsService from '../services/newsService';
 import * as express from 'express';
 
-
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
-
 async function getNewsList(req: express.Request, res: express.Response) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        console.log("Database created!");
-        db.close();
-    });
-
-    var data = newsService.getNews();
+    var data = await newsService.getNews();
     return res.status(200).send(data);
 }
 
-function getNewsById(req: express.Request, res: express.Response) {
-    var data = newsService.getNewsById(req.params.id);
+async function getNewsById(req: express.Request, res: express.Response) {
+    var data = await newsService.getNewsById(req.params.id);
+    return res.status(200).send(data);
+}
+
+async function insertNews(req: express.Request, res: express.Response) {
+    var data = await newsService.insertNews(req.body);
+    return res.status(200).send(data);
+}
+
+async function updateNews(req: express.Request, res: express.Response) {
+    var data = await newsService.updateNews(req.params.id, req.body);
+    return res.status(200).send(data);
+}
+
+async function removeNews(req: express.Request, res: express.Response) {
+    var data = await newsService.removeNews(req.params.id);
     return res.status(200).send(data);
 }
 
 export {
     getNewsList,
-    getNewsById
+    getNewsById,
+    insertNews,
+    updateNews,
+    removeNews
 }

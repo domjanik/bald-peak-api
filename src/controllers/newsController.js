@@ -1,22 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const newsService = require("../services/newsService");
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
 async function getNewsList(req, res) {
-    MongoClient.connect(url, function (err, db) {
-        if (err)
-            throw err;
-        console.log("Database created!");
-        db.close();
-    });
-    var data = newsService.getNews();
+    var data = await newsService.getNews();
     return res.status(200).send(data);
 }
 exports.getNewsList = getNewsList;
-function getNewsById(req, res) {
-    var data = newsService.getNewsById(req.params.id);
+async function getNewsById(req, res) {
+    var data = await newsService.getNewsById(req.params.id);
     return res.status(200).send(data);
 }
 exports.getNewsById = getNewsById;
+async function insertNews(req, res) {
+    var data = await newsService.insertNews(req.body);
+    return res.status(200).send(data);
+}
+exports.insertNews = insertNews;
+async function updateNews(req, res) {
+    var data = await newsService.updateNews(req.params.id, req.body);
+    return res.status(200).send(data);
+}
+exports.updateNews = updateNews;
+async function removeNews(req, res) {
+    var data = await newsService.removeNews(req.params.id);
+    return res.status(200).send(data);
+}
+exports.removeNews = removeNews;
 //# sourceMappingURL=newsController.js.map
