@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as newsController from './controllers/newsController';
+import * as userController from './controllers/userController';
 
 export const app = express();
 export const port = 4000;
@@ -29,3 +30,7 @@ app.get('/news/:id', newsController.getNewsById);
 app.post('/news', newsController.insertNews);
 app.put('/news/:id', newsController.updateNews);
 app.delete('/news/:id', newsController.removeNews);
+
+app.get('/user', userController.getUserData);
+app.post('/user/register', userController.register);
+app.post('/user/login', userController.login);

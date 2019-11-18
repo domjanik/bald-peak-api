@@ -1,34 +1,33 @@
 import * as dbService from '../services/databaseService';
 
 async function getNews() {
-    let data = await dbService.get({}, 'news');
-    return data;
+    return await dbService.get({}, dbService.databaseTables.news);
 }
 
 async function getNewsById(id) {
-    let data = await dbService.get({id: id}, 'news');
-    return data;
+    return await dbService.get({id: id}, dbService.databaseTables.news);
 }
 
+async function getLastId(): Promise<any> {
+    return await dbService.getLastId(dbService.databaseTables.news);
+}
 
 async function insertNews(news) {
-    let data = await dbService.insert(news, 'news');
-    return data;
+    return await dbService.insert(news, dbService.databaseTables.news);
 }
 
 async function removeNews(id) {
-    let data = await dbService.remove({id: id}, 'news');
-    return data;
+    return await dbService.remove({id: id}, dbService.databaseTables.news);
 }
 
 async function updateNews(id, news) {
-    let data = await dbService.update({id: id}, news, 'news');
-    return data;
+    return await dbService.update({id: id}, news, dbService.databaseTables.news);
 }
 
 export {
     getNews,
     getNewsById,
+    getLastId,
     removeNews,
     insertNews,
     updateNews

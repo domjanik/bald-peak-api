@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const newsController = require("./controllers/newsController");
+const userController = require("./controllers/userController");
 exports.app = express();
 exports.port = 4000;
 var originsWhitelist = [
@@ -27,4 +28,7 @@ exports.app.get('/news/:id', newsController.getNewsById);
 exports.app.post('/news', newsController.insertNews);
 exports.app.put('/news/:id', newsController.updateNews);
 exports.app.delete('/news/:id', newsController.removeNews);
+exports.app.get('/user', userController.getUserData);
+exports.app.post('/user/register', userController.register);
+exports.app.post('/user/login', userController.login);
 //# sourceMappingURL=main.js.map

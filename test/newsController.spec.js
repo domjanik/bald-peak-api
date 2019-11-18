@@ -14,7 +14,7 @@ describe('newsController', function() {
               done();
             })
         })
-    })
+    });
 
     describe('Get news single', function() {
         it('Should return 1 news with id 3', function(done) {

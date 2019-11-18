@@ -1,15 +1,19 @@
 import * as mongodb from 'mongodb';
+import News from "../models/newsModel";
+const config = require('../config/config.json');
 
 let MongoClient = mongodb.MongoClient;
-let url = "mongodb://localhost:27017/bald-peak";
+let url = `mongodb://${config.db.user}:${config.db.password}@${config.db.address}?authMechanism=DEFAULT&authSource=bald-peak`;
 let connectionOptions = {
     poolSize: 20,
     socketTimeoutMS: 480000
 };
 
 const databaseTables = {
-    news: 'news'
-}
+    news: 'news',
+    projects: 'projects',
+    users: 'users'
+};
 
 function prepareDB() {
     MongoClient.connect(url, connectionOptions, function (err, db) {
@@ -41,7 +45,7 @@ function prepareDB() {
     });
 }
 
-async function get(filters, dbName) {
+async function get(filters, dbName): Promise<any[]> {
     return new Promise((resolve, reject) => {
         try {
             MongoClient.connect(url, connectionOptions, function (err, db) {
@@ -52,6 +56,27 @@ async function get(filters, dbName) {
                     if (err) throw err;
                     console.log('Got data');
                     resolve(result);
+                    db.close();
+                });
+            });
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
+async function getLastId(dbName) {
+    return new Promise((resolve, reject) => {
+        try {
+            MongoClient.connect(url, connectionOptions, function (err, db) {
+                if (err) throw err;
+                console.log('Connected to DB');
+                const dbo = db.db("bald-peak");
+                return dbo.collection(dbName).find().sort({id:-1}).limit(1).toArray((err, result: any) => {
+                    if (err) throw err;
+                    console.log('Got data');
+                    console.log(JSON.stringify(result));
+                    resolve(result.length && result[0] ? result[0].id : 0);
                     db.close();
                 });
             });
@@ -123,6 +148,7 @@ async function update(filters, data, dbName) {
 export {
     prepareDB,
     get,
+    getLastId,
     insert,
     update,
     remove,
