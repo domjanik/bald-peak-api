@@ -42,3 +42,5 @@ Thumbs.db
 *.css
 *.css.map
 src/config/config.json
+*.js
+*.js.map
