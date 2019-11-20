@@ -14,7 +14,7 @@ async function getNewsById(req, res) {
 exports.getNewsById = getNewsById;
 async function insertNews(req, res) {
     try {
-        let newNews = new newsModel_1.default(req.body, { id: 0 });
+        let newNews = new newsModel_1.default(req.body, { id: req.user.id });
         newNews.id = await newsService.getLastId() + 1;
         let data = await newsService.insertNews(newNews);
         return res.status(200).send(data);

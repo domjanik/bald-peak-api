@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as newsController from './controllers/newsController';
 import * as userController from './controllers/userController';
+import auth from './middleware/auth.middleware';
 
 export const app = express();
 export const port = 4000;
@@ -25,12 +26,12 @@ app.head('', (req, res) => {
   res.status(200).send();
 });
 
-app.get('/news', newsController.getNewsList);
-app.get('/news/:id', newsController.getNewsById);
-app.post('/news', newsController.insertNews);
-app.put('/news/:id', newsController.updateNews);
-app.delete('/news/:id', newsController.removeNews);
+app.get('/news', auth, newsController.getNewsList);
+app.get('/news/:id', auth, newsController.getNewsById);
+app.post('/news', auth, newsController.insertNews);
+app.put('/news/:id', auth, newsController.updateNews);
+app.delete('/news/:id', auth, newsController.removeNews);
 
-app.get('/user', userController.getUserData);
+app.get('/user', auth, userController.getUserData);
 app.post('/user/register', userController.register);
 app.post('/user/login', userController.login);
