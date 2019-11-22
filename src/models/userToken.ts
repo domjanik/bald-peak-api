@@ -1,4 +1,4 @@
-class userData {
+export default class userToken {
     userName: string;
     id: string;
     iat:  number;

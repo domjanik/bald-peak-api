@@ -75,7 +75,6 @@ async function getLastId(dbName) {
                 return dbo.collection(dbName).find().sort({id:-1}).limit(1).toArray((err, result: any) => {
                     if (err) throw err;
                     console.log('Got data');
-                    console.log(JSON.stringify(result));
                     resolve(result.length && result[0] ? result[0].id : 0);
                     db.close();
                 });
