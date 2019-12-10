@@ -26,8 +26,8 @@ app.head('', (req, res) => {
   res.status(200).send();
 });
 
-app.get('/news', auth, newsController.getNewsList);
-app.get('/news/:id', auth, newsController.getNewsById);
+app.get('/news', newsController.getNewsList);
+app.get('/news/:id', newsController.getNewsById);
 app.post('/news', auth, newsController.insertNews);
 app.put('/news/:id', auth, newsController.updateNews);
 app.delete('/news/:id', auth, newsController.removeNews);
