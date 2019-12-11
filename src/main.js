@@ -24,8 +24,8 @@ exports.app.use(bodyParser.json());
 exports.app.head('', (req, res) => {
     res.status(200).send();
 });
-exports.app.get('/news', auth_middleware_1.default, newsController.getNewsList);
-exports.app.get('/news/:id', auth_middleware_1.default, newsController.getNewsById);
+exports.app.get('/news', newsController.getNewsList);
+exports.app.get('/news/:id', newsController.getNewsById);
 exports.app.post('/news', auth_middleware_1.default, newsController.insertNews);
 exports.app.put('/news/:id', auth_middleware_1.default, newsController.updateNews);
 exports.app.delete('/news/:id', auth_middleware_1.default, newsController.removeNews);
