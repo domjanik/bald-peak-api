@@ -19,7 +19,7 @@ async function insertNews(req: extRequest, res: express.Response) {
         newNews.id = await newsService.getLastId() + 1;
         let data = await newsService.insertNews(newNews);
         return res.status(200).send(data);
-    } catch(err) {
+    } catch (err) {
         console.error(err);
         return res.status(400).send('Invalid request');
     }

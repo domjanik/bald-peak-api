@@ -5,7 +5,11 @@ async function getNews() {
 }
 
 async function getNewsById(id) {
-    return await dbService.get({id: id}, dbService.databaseTables.news);
+    if (Number(id) == id) {
+        return (await dbService.get({id: Number(id)}, dbService.databaseTables.news))[0];
+    } else {
+        throw new Error('Invalid ID');
+    }
 }
 
 async function getLastId(): Promise<any> {

@@ -12,6 +12,7 @@ let connectionOptions = {
 const databaseTables = {
     news: 'news',
     projects: 'projects',
+    images: 'images',
     users: 'users'
 };
 

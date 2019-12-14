@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as newsController from './controllers/newsController';
+import * as imageController from './controllers/imageController';
 import * as userController from './controllers/userController';
 import auth from './middleware/auth.middleware';
 
@@ -31,6 +32,8 @@ app.get('/news/:id', newsController.getNewsById);
 app.post('/news', auth, newsController.insertNews);
 app.put('/news/:id', auth, newsController.updateNews);
 app.delete('/news/:id', auth, newsController.removeNews);
+
+app.get('/image/:id', imageController.getImage);
 
 app.get('/user', auth, userController.getUserData);
 app.post('/user/register', userController.register);

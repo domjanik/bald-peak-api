@@ -5,6 +5,7 @@ export default class News {
             this.content = data.content;
             this.date = new Date();
             this.creator = creator.id;
+            this.avatarId = data.avatarId;
         } else {
             throw new Error('Invalid data');
         }
@@ -14,6 +15,7 @@ export default class News {
     content: string;
     date: Date;
     creator: string;
+    avatarId: string;
 
     validate(data: any): boolean {
         let valid = true;
