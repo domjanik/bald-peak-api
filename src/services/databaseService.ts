@@ -1,5 +1,4 @@
 import * as mongodb from 'mongodb';
-import News from "../models/newsModel";
 const config = require('../config/config.json');
 
 let MongoClient = mongodb.MongoClient;
