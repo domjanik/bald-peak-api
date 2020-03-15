@@ -35,8 +35,16 @@ async function updateNews(req: express.Request, res: express.Response) {
 }
 
 async function removeNews(req: express.Request, res: express.Response) {
-    let data = await newsService.removeNews(req.params.id);
-    return res.status(200).send(data);
+    const imageData = await newsService.getNewsById(req.params.id);
+    if (!imageData) {
+        return res.status(404).send();
+    }
+    if (imageData.avatarId) {
+        await imageService.removeImage(imageData.avatarId);
+    }
+
+    await newsService.removeNews(req.params.id);
+    return res.status(200).send();
 }
 
 export {

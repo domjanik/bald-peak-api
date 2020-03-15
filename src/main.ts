@@ -18,6 +18,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(bodyParser({limit: '50mb'}));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -34,6 +35,7 @@ app.put('/news/:id', auth, newsController.updateNews);
 app.delete('/news/:id', auth, newsController.removeNews);
 
 app.get('/image/:id', imageController.getImage);
+app.delete('/image/:id', imageController.removeImage);
 
 app.get('/user', auth, userController.getUserData);
 app.post('/user/register', userController.register);

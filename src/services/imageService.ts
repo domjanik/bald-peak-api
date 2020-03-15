@@ -9,14 +9,20 @@ async function getLastId(): Promise<any> {
 }
 
 async function insertImage(image){
-    const lastId = await getLastId();
+    const lastId = await getLastId() + 1;
     await dbService.insert({
         id: lastId,
         imageData: image
     }, dbService.databaseTables.images);
     return lastId;
 }
+
+async function removeImage(id) {
+    return await dbService.remove({id: Number(id)}, dbService.databaseTables.images);
+}
+
 export {
     getImage,
+    removeImage,
     insertImage
 };

@@ -7,6 +7,12 @@ async function getImage(req: extRequest, res: express.Response) {
     return res.status(200).send(data);
 }
 
+async function removeImage(req: extRequest, res: express.Response) {
+    let data = await imageService.removeImage(req.params.id);
+    return res.status(200).send(data);
+}
+
 export {
-    getImage
+    getImage,
+    removeImage
 }
