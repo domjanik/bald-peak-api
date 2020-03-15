@@ -23,11 +23,11 @@ async function insertNews(news) {
 }
 exports.insertNews = insertNews;
 async function removeNews(id) {
-    return await dbService.remove({ id: id }, dbService.databaseTables.news);
+    return await dbService.remove({ id: Number(id) }, dbService.databaseTables.news);
 }
 exports.removeNews = removeNews;
 async function updateNews(id, news) {
-    return await dbService.update({ id: id }, news, dbService.databaseTables.news);
+    return await dbService.update({ id: Number(id) }, news, dbService.databaseTables.news);
 }
 exports.updateNews = updateNews;
 //# sourceMappingURL=newsService.js.map

@@ -3,6 +3,7 @@ export default class News {
         if (this.validate(data)) {
             this.title = data.title;
             this.content = data.content;
+            this.description = data.description;
             this.date = new Date();
             this.creator = creator.id;
             this.avatarId = data.avatarId;
@@ -12,6 +13,7 @@ export default class News {
     }
     id: number;
     title: string;
+    description: string;
     content: string;
     date: Date;
     creator: string;

@@ -1,4 +1,5 @@
 import * as newsService from '../services/newsService';
+import * as imageService from '../services/imageService';
 import * as express from 'express';
 import News from "../models/newsModel";
 import extRequest from '../models/extenderRequestModel';
@@ -17,6 +18,9 @@ async function insertNews(req: extRequest, res: express.Response) {
     try {
         let newNews = new News(req.body, {id: req.user.id});
         newNews.id = await newsService.getLastId() + 1;
+        if (req.body.image) {
+            newNews.avatarId = await imageService.insertImage(req.body.image);
+        }
         let data = await newsService.insertNews(newNews);
         return res.status(200).send(data);
     } catch (err) {

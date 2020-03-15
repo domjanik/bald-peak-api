@@ -95,6 +95,7 @@ async function insert(data, dbName) {
                 dbo.collection(dbName).insertOne(data, function (err, res) {
                     if (err) throw err;
                     console.log("1 document inserted");
+                    console.log(res);
                     resolve();
                     db.close();
                 });

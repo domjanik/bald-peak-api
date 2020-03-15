@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const newsService = require("../services/newsService");
+const imageService = require("../services/imageService");
 const newsModel_1 = require("../models/newsModel");
 async function getNewsList(req, res) {
     let data = await newsService.getNews();
@@ -16,6 +17,9 @@ async function insertNews(req, res) {
     try {
         let newNews = new newsModel_1.default(req.body, { id: req.user.id });
         newNews.id = await newsService.getLastId() + 1;
+        if (req.body.image) {
+            newNews.avatarId = await imageService.insertImage(req.body.image);
+        }
         let data = await newsService.insertNews(newNews);
         return res.status(200).send(data);
     }

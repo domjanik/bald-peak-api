@@ -21,11 +21,11 @@ async function insertNews(news) {
 }
 
 async function removeNews(id) {
-    return await dbService.remove({id: id}, dbService.databaseTables.news);
+    return await dbService.remove({id: Number(id)}, dbService.databaseTables.news);
 }
 
 async function updateNews(id, news) {
-    return await dbService.update({id: id}, news, dbService.databaseTables.news);
+    return await dbService.update({id: Number(id)}, news, dbService.databaseTables.news);
 }
 
 export {
